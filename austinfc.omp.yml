@@ -76,7 +76,7 @@ blocks:
           type: time
           style: diamond
         - properties:
-            command: echo $(/bin/bash $HOME/Google_Drive/Coding/austin_fc_stuff/next_austin_fc_game.sh)
+            command: echo $(/bin/bash $HOME/austin_fc_stuff/next_austin_fc_game.sh)
             shell: bash
           cache:
             duration: 4h
