@@ -8,9 +8,9 @@ palette:
     sentimiento_mint: '#B3D4B9'
     orange: '#b14000'
     malibu_stu_pink: '#b10071'
-    red: '#b10007'
+    red_card: '#b10007'
     armadillo_kit: '#E3E0CE'
-    yellow: '#9db100'
+    yellow_card: '#9db100'
     base_grey: '#444444'
 blocks:
     - type: prompt
