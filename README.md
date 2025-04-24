@@ -39,6 +39,11 @@ This project provides utilities to:
 
 ## Set Oh My Posh Theme
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation)
+2. Install nerd fonts. 
+   ```bash
+   brew tap homebrew/cask-fonts
+   brew install --cask font-hack-nerd-font
+   ```
 2. Install the theme using the command:
    ```bash
    oh-my-posh init --shell bash --config austinfc.omp.yml --apply
@@ -46,6 +51,6 @@ This project provides utilities to:
 
 ### Running the Schedule Parser
 
-```bash
-python austinfc_days_til.py
-```
+  ```bash
+  python austinfc_days_til.py
+  ```
