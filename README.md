@@ -1,14 +1,14 @@
 # Austin FC Stuff
 
 A collection of Austin FC themes for oh-my-posh along with tools to track 
-and display Austin FC game schedules and information.
+and display Austin FC match schedules and information.
 
 ## Overview
 
 This project provides utilities to:
 - Austin FC theme for oh-my-posh
 - Fetch and parse the current Austin FC MLS schedule
-- Track countdown to games for oh-my-posh theme
+- Track countdown to matchs for oh-my-posh theme
 
 ## Example Display
 
@@ -21,18 +21,27 @@ This project provides utilities to:
 
 `austinfc_days_til.py` - A Python script that:
 - Scrapes Austin FC schedule data from plaintextsports.com
-- Parses game information (dates, opponents, locations)
+- Parses match information (dates, opponents, locations)
 - Outputs formatted schedule data to a markdown file
 
 ### Next Game Finder
 
-`next_austin_fc_game_linux.sh` - A shell script that:
+`next_austin_fc_match.sh` - A shell script that:
 - Check if schedule markdown file is present
 - If not, copy the latest schedule from the repository
 - Reads the schedule markdown file
-- Determines the next upcoming game
+- Determines the next upcoming match
 - Calculates days until the next match
-- Displays formatted game information
+- Displays formatted match information
+
+### How to use
+To ways to have this script as part of the oh-my-posh theme:
+1. Use the script directly in the theme by updating the path to the script in the theme file.
+2. Create a symlink to the script in your PATH and call it from the theme.
+
+```bash
+ln -s /path/to/next_austin_fc_match.sh $Home/.austin_fc/austinfc_days_til
+```
 
 ### Terminal Integration
 

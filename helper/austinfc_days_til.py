@@ -6,7 +6,7 @@ import os
 import pandas as pd
 
 
-def extract_game_entries(text):
+def extract_match_entries(text):
     # This pattern matches a G followed by 1-2 digits, then captures everything up to
     # (but not including) the next G followed by 1-2 digits
     pattern = r'(G\d{1,2}.*?)(?=G\d{1,2}|$)'
@@ -15,11 +15,11 @@ def extract_game_entries(text):
     return [match.strip() for match in matches]
 
 
-def parse_game_entry(entry):
-    # Extract game number
-    game_match = re.search(r'G(\d+):', entry)
+def parse_match_entry(entry):
+    # Extract match number
+    match = re.search(r'G(\d+):', entry)
 
-    game_number = game_match.group(1)
+    match_number = match.group(1)
 
     # Extract date (Format: Sa M/D)
     date_match = re.search(r'(?:Sa|Su|Mo|Tu|We|Th|Fr)\s+(\d+)/(\d+)', entry)
@@ -63,7 +63,7 @@ def parse_game_entry(entry):
             result = "Draw"
 
     return {
-        'game': game_number,
+        'match': match_number,
         'date': date,
         'opponent': opponent,
         'location': location,
@@ -94,27 +94,27 @@ def fetch_austin_fc_schedule():
         lines = [line for line in lines if line.startswith('G')]
         
         # Find the schedule block in the text
-        game_entries = []
+        match_entries = []
         for line in lines:
-            # Extract game entries from schedule block
-            schedule = extract_game_entries(line)
-            for game in schedule:
-                game_entries.append(game)
+            # Extract match entries from schedule block
+            schedule = extract_match_entries(line)
+            for match in schedule:
+                match_entries.append(match)
 
-        # Parse each game entry and collect data for DataFrame
-        games_data = []
-        for entry in game_entries:
-            game_data = parse_game_entry(entry)
-            if game_data:
-                games_data.append(game_data)
+        # Parse each match entry and collect data for DataFrame
+        matchs_data = []
+        for entry in match_entries:
+            match_data = parse_match_entry(entry)
+            if match_data:
+                matchs_data.append(match_data)
 
         # Create DataFrame from parsed data
-        df = pd.DataFrame(games_data)
+        df = pd.DataFrame(matchs_data)
         
-        # Sort the DataFrame by game number
-        df['game'] = df['game'].astype(int)
-        df = df.sort_values(by='game')
-        df['game'] = df['game'].astype(str)
+        # Sort the DataFrame by match number
+        df['match'] = df['match'].astype(int)
+        df = df.sort_values(by='match')
+        df['match'] = df['match'].astype(str)
         
         # Create markdown table from DataFrame
         markdown = "# Austin FC 2025 Schedule\n\n"
@@ -125,7 +125,7 @@ def fetch_austin_fc_schedule():
         
         # Add each row from the DataFrame
         for _, row in df.iterrows():
-            markdown += f"|{row['game']}|{row['date']}|{row['opponent']}|{row['location']}|{row['result']}|\n"
+            markdown += f"|{row['match']}|{row['date']}|{row['opponent']}|{row['location']}|{row['result']}|\n"
 
         # Save to markdown file
         home_dir = os.path.expanduser("~")
