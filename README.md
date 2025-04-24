@@ -1,13 +1,19 @@
 # Austin FC Stuff
 
-A collection of tools to track and display Austin FC game schedules and information.
+A collection of Austin FC themes for oh-my-posh along with tools to track 
+and display Austin FC game schedules and information.
 
 ## Overview
 
 This project provides utilities to:
+- Austin FC theme for oh-my-posh
 - Fetch and parse the current Austin FC MLS schedule
-- Display upcoming game information in terminal
-- Track countdown to games
+- Track countdown to games for oh-my-posh theme
+
+## Example Display
+
+![Austin FC CLI display](images/austin_fc_example_theme.png)
+
 
 ## Components
 
