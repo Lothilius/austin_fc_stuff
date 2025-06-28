@@ -39,7 +39,8 @@ To ways to have this script as part of the oh-my-posh theme:
 1. Use the script directly in the theme by updating the path to the script in the theme file.
 2. Create a symlink to the script in your PATH and call it from the theme.
 
-```bash
+```zsh
+mkdir  $HOME/.austin_fc
 ln -s /path/to/next_austin_fc_match.sh $Home/.austin_fc/austinfc_days_til
 ```
 
@@ -56,12 +57,12 @@ ln -s /path/to/next_austin_fc_match.sh $Home/.austin_fc/austinfc_days_til
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation)
 2. Install nerd fonts. 
    ```bash
-   brew tap homebrew/cask-fonts
+   brew tap homebrew/cask
    brew install --cask font-hack-nerd-font
    ```
 2. Install the theme using the command:
    ```bash
-   oh-my-posh init --shell bash --config austinfc.omp.yml --apply
+   oh-my-posh init --shell zsh --config austinfc.omp.yml >> ~/.zshrc
    ```
 
 ### Running the Schedule Parser
