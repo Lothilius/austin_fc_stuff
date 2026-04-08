@@ -25,27 +25,26 @@ DAYS_UNTIL_NEXT_MATCH=999999  # Start with a large number
 
 # Read the markdown file line by line
 while IFS= read -r line; do
-    # Skip lines that don't contain match data
-    if [[ ! "$line" =~ ^\|[0-9]+ ]]; then
+    # Skip blank lines and lines that don't contain match data
+    if [[ -z "$line" || ! "$line" =~ ^\|[0-9]+ ]]; then
         continue
     fi
-    
     # Extract match information using awk
     MATCH_NUM=$(echo "$line" | awk -F'|' '{print $2}' | tr -d ' ')
     DATE_STR=$(echo "$line" | awk -F'|' '{print $3}' | tr -d ' ')
     OPPONENT=$(echo "$line" | awk -F'|' '{print $4}' | tr -d ' ')
     LOCATION=$(echo "$line" | awk -F'|' '{print $5}' | tr -d ' ')
     RESULT=$(echo "$line" | awk -F'|' '{print $6}' | tr -d ' ')
-    
+
     # Skip if this is not a valid match entry or if the match already has a result
     if [[ -z "$DATE_STR" || "$RESULT" != "tbd" ]]; then
         continue
     fi
-    
+
     # Convert date format to YYYY-MM-DD
     # Assuming DATE_STR is in MM-DD-YYYY format
     MATCH_DATE=$(echo "$DATE_STR" | awk -F'-' '{print $3"-"$1"-"$2}')
-    
+
     # Compare with today's date
     if [[ "$MATCH_DATE" > "$TODAY" || "$MATCH_DATE" == "$TODAY" ]]; then
         # Calculate days until this match

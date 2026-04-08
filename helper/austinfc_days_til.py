@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 import os
 import pandas as pd
+import tempfile
 
 
 def extract_match_entries(text):
@@ -26,7 +27,7 @@ def parse_match_entry(entry):
     if date_match:
         month = date_match.group(1).zfill(2)
         day = date_match.group(2).zfill(2)
-        date = f"{month}-{day}-2025"
+        date = f"{month}-{day}-{datetime.now().year}"
     else:
         date = "Unknown"
 
@@ -74,7 +75,7 @@ def parse_match_entry(entry):
 def fetch_austin_fc_schedule():
     """Fetch the Austin FC schedule from plaintextsports.com and parse into markdown format"""
 
-    url = "https://plaintextsports.com/mls/2025/teams/austin-fc"
+    url = "https://plaintextsports.com/mls/2026/teams/austin-fc"
 
     try:
         # Make HTTP request to get the page content
@@ -117,7 +118,7 @@ def fetch_austin_fc_schedule():
         df['match'] = df['match'].astype(str)
         
         # Create markdown table from DataFrame
-        markdown = "# Austin FC 2025 Schedule\n\n"
+        markdown = "# Austin FC 2026 Schedule\n\n"
         
         # Generate markdown table header
         markdown += "| Game | Date | Opponent | Location | Result |\n"
@@ -135,8 +136,11 @@ def fetch_austin_fc_schedule():
         os.makedirs(austin_fc_dir, exist_ok=True)
 
         output_file = os.path.join(austin_fc_dir, "austin_fc_schedule.md")
-        with open(output_file, 'w') as f:
-            f.write(markdown)
+        # Write to a temp file first, then atomically replace the target if it exists.
+        with tempfile.NamedTemporaryFile('w', dir=austin_fc_dir, delete=False) as tmp:
+            tmp.write(markdown)
+            temp_path = tmp.name
+        os.replace(temp_path, output_file)
 
         print(f"Schedule saved to {output_file}")
         return markdown

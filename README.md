@@ -57,7 +57,7 @@ ln -s /path/to/next_austin_fc_match.sh $Home/.austin_fc/austinfc_days_til
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation)
 2. Install nerd fonts. 
    ```bash
-   brew tap homebrew/cask
+   brew tap homebrew/cask-fonts
    brew install --cask font-hack-nerd-font
    ```
 2. Install the theme using the command:

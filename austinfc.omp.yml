@@ -55,14 +55,26 @@ blocks:
           foreground: p:dark_verde
           background: p:sentimiento_mint
           template: "  {{ .Full }} "
+#        - properties:
+#            fetch_version: true
+#          type: terraform
+#          style: powerline
+#          powerline_symbol: 
+#          foreground: p:dark_verde
+#          background: p:sentimiento_mint
+#          template: "  {{ if .Version }}{{ .Version }}{{ end }}"
         - properties:
-            fetch_version: true
-          type: terraform
+            command: echo $(/bin/bash $HOME/.austin_fc/terraform_version_check.sh)
+            shell: bash
+          cache:
+            duration: 1h
+            strategy: folder
+          type: command
           style: powerline
           powerline_symbol: 
-          foreground: p:dark_verde
-          background: p:sentimiento_mint
-          template: "  {{ if .Version }} {{ .Version }}{{ end }}"
+          foreground: p:sentimiento_mint
+          background: p:dark_verde
+          template: "  {{ .Output }} "
     - type: prompt
       alignment: right
       overflow: hide
